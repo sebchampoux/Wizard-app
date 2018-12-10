@@ -1,0 +1,36 @@
+.player-round {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	background-color: $color-light-primary;
+	padding: 10px;
+	border-radius: 10px;
+	border: 1px solid darken($color-light-primary, 3%);
+}
+
+.player-round--lighter-bg {
+	background-color: lighten($color-light-primary, 5%);
+	border-color: $color-light-primary;
+}
+
+.player-round__score-wrapper {
+	width: 50%;
+}
+
+.player-round__score {
+	text-align: center;
+}
+
+.player-round__inputs-wrapper {
+	width: calc(50% - 15px);
+}
+
+.player-round__input {
+	text-align: center;
+	margin-bottom: 5px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}

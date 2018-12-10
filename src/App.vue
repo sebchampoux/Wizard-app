@@ -1,12 +1,21 @@
 <template>
 	<div class="app-frame">
-		<p>A quick brown fox jumps over the lazy dog</p>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<player-round></player-round>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
+	import PlayerRound from "./components/player-round";
+
 	export default {
-		name: 'App'
+		name: 'App',
+		components: {PlayerRound}
 	}
 </script>
 
