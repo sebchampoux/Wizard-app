@@ -15,7 +15,7 @@
 }
 
 .player-round__score-wrapper {
-	width: 50%;
+	width: 40%;
 }
 
 .player-round__score {
@@ -23,7 +23,12 @@
 }
 
 .player-round__inputs-wrapper {
-	width: calc(50% - 15px);
+	width: calc(60% - 10px);
+}
+
+.player-round__buttons-wrapper {
+	display: flex;
+	justify-content: space-between;
 }
 
 .player-round__input {
@@ -33,4 +38,8 @@
 	&:last-child {
 		margin-bottom: 0;
 	}
+}
+
+.player-round__input--error {
+	@extend %input-error;
 }

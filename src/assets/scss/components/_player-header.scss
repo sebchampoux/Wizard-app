@@ -1,0 +1,36 @@
+.player-header {
+	height: 120px;
+	padding: 0 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.player-header__name {
+	font-size: $font-size-title-6;
+	text-transform: uppercase;
+	font-weight: $font-weight-bold;
+
+	margin: 0 0 15px 0;
+}
+
+.player-header__form-wrapper {
+	display: flex;
+	flex-wrap: nowrap;
+
+	margin: 0 0 15px 0;
+}
+
+.player-header__confirm-btn {
+	margin-left: 10px;
+}
+
+.player-header__score {
+	font-size: $font-size-title-4;
+	font-weight: $font-weight-bold;
+}
+
+.player-header__input--error {
+	@extend %input-error;
+}
