@@ -1,6 +1,7 @@
 .player-round {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
+	//justify-content: space-between;
 	align-items: center;
 
 	background-color: $color-light-primary;
@@ -15,20 +16,24 @@
 }
 
 .player-round__score-wrapper {
-	width: 40%;
+	//width: 30%;
 }
 
 .player-round__score {
 	text-align: center;
+	font-size: $font-size-title-4;
 }
 
 .player-round__inputs-wrapper {
-	width: calc(60% - 10px);
+	//width: calc(70% - 5px);
 }
 
 .player-round__buttons-wrapper {
+	height: 38px;
+
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .player-round__input {

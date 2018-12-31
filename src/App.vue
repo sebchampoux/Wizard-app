@@ -2,22 +2,32 @@
 	<div class="app-frame">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<player-header></player-header>
 					<player-round></player-round>
 					<player-round :is_even="true"></player-round>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<player-header></player-header>
 					<player-round></player-round>
 					<player-round :is_even="true"></player-round>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<player-header></player-header>
 					<player-round></player-round>
 					<player-round :is_even="true"></player-round>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-2">
+					<player-header></player-header>
+					<player-round></player-round>
+					<player-round :is_even="true"></player-round>
+				</div>
+				<div class="col-md-2">
+					<player-header></player-header>
+					<player-round></player-round>
+					<player-round :is_even="true"></player-round>
+				</div>
+				<div class="col-md-2">
 					<player-header></player-header>
 					<player-round></player-round>
 					<player-round :is_even="true"></player-round>
