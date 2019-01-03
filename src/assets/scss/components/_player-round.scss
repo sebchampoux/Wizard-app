@@ -8,6 +8,8 @@
 	padding: 10px;
 	border-radius: 10px;
 	border: 1px solid darken($color-light-primary, 3%);
+
+	position: relative;
 }
 
 .player-round--lighter-bg {
@@ -15,18 +17,14 @@
 	border-color: $color-light-primary;
 }
 
-.player-round__score-wrapper {
-	//width: 30%;
-}
+.player-round__score-wrapper {}
 
 .player-round__score {
 	text-align: center;
 	font-size: $font-size-title-4;
 }
 
-.player-round__inputs-wrapper {
-	//width: calc(70% - 5px);
-}
+.player-round__inputs-wrapper {}
 
 .player-round__buttons-wrapper {
 	height: 38px;
@@ -47,4 +45,19 @@
 
 .player-round__input--error {
 	@extend %input-error;
+}
+
+.player-round__round-number {
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	width: 25px;
+	height: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: #fff;
+	border-top-left-radius: 10px;
 }

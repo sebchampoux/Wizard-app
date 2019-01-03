@@ -1,5 +1,5 @@
 <template>
-	<div class="player-header">
+	<div class="player-header" :class="[additional_classes]">
 		<p class="player-header__name" v-if="name_confirmed">{{ player_name }}</p>
 		<div class="player-header__form-wrapper" v-else>
 			<input type="text" class="form-control player-header__input" :class="{'player-header__input--error': input_error.is_active}" v-model="player_name" placeholder="Nom du joueur">
@@ -37,5 +37,12 @@
 				this.name_confirmed = true;
 			}
 		},
+		props: {
+			additional_classes: {
+				type: String,
+				required: false,
+				default: null,
+			}
+		}
 	}
 </script>

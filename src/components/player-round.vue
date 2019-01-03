@@ -1,5 +1,6 @@
 <template>
-	<div class="player-round" :class="{'player-round--lighter-bg': is_even}">
+	<div class="player-round" :class="[{'player-round--lighter-bg': is_even}, additional_classes]">
+		<p class="player-round__round-number">{{ round_number }}</p>
 		<div class="player-round__score-wrapper">
 			<h1 class="player-round__score">{{ round_score }}</h1>
 		</div>
@@ -49,7 +50,6 @@
 			finish_round(success = false) {
 				if(this.guess === null) {
 					this.display_guess_error();
-					console.log('Display error');
 					return;
 				}
 				this.round_over = true;
@@ -92,6 +92,7 @@
 
 			/**
 			 * Détermine si le vrai résultat a été saisi ou non
+			 *
 			 * @return {boolean}
 			 */
 			result_entered() {
@@ -102,8 +103,17 @@
 			is_even: {
 				type: Boolean,
 				default: false,
-				required: false
+				required: false,
 			},
+			additional_classes: {
+				type: String,
+				default: null,
+				required: false,
+			},
+			round_number: {
+				type: Number,
+				required: true,
+			}
 		},
 	}
 </script>
