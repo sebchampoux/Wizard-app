@@ -6,7 +6,7 @@
 		</div>
 		<div class="player-round__inputs-wrapper">
 			<input type="number" class="form-control player-round__input" :class="{'player-round__input--error': error_border.is_active}" placeholder="Estimation" v-model="guess">
-			<input type="number" class="form-control player-round__input" :class="{'player-round__input--error': result_entered}" placeholder="Résultat" v-model="real_result" v-if="round_over">
+			<input type="number" class="form-control player-round__input" :class="{'player-round__input--error': no_result_entered}" placeholder="Résultat" v-model="real_result" v-if="round_over">
 			<div class="player-round__buttons-wrapper" v-else>
 				<button type="button" class="btn btn-sm btn-success" @click="finish_round(true)"><i class="icon-ok"></i></button>
 				<button type="button" class="btn btn-sm btn-danger" @click="finish_round(false)"><i class="icon-cancel"></i></button>
@@ -95,7 +95,7 @@
 			 *
 			 * @return {boolean}
 			 */
-			result_entered() {
+			no_result_entered() {
 				return this.real_result === null;
 			}
 		},

@@ -2,63 +2,57 @@
 	<div class="app-frame">
 		<div class="container">
 			<div class="row">
+				<!-- Les colonnes joueur -->
 				<player-column
-						v-for="iteration in number_of_players"
-						:key="iteration"
-						:number_of_rounds="number_of_rounds"
+						v-for="player_number in number_of_players"
+						:key="player_number - 1"
+						:player_index="player_number - 1"
 						:additional_classes="player_cols_class">
 				</player-column>
+				<!-- La colonne ajout nouveau joueur -->
+				<div
+						class="add-new-player"
+						:class="player_cols_class"
+						v-if="can_add_more_players">
+					<button class="btn btn-success" @click="add_new_player">+ Joueur</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	import PlayerHeader from "./components/player-header";
-	import PlayerRound from "./components/player-round";
 	import PlayerColumn from "./components/player-column";
+
+	import { mapGetters, mapMutations } from 'vuex';
+	import { MAX_NUMBER_OF_PLAYERS } from "./store/store";
 
 	export default {
 		name: 'App',
-		components: {PlayerColumn, PlayerHeader, PlayerRound},
-		data() {
-			return {
-				number_of_players: 3, // Min 2, max 6
-			}
-		},
+		components: {PlayerColumn},
 		methods: {
-			/**
-			 * Ajoute un nouveau joueur à la partie
-			 */
-			addNewPlayer() {
-				if (this.number_of_players >= 6) {
-					return;
-				}
-				this.number_of_players++;
-			}
+			...mapMutations([
+				'add_new_player'
+			])
 		},
 		computed: {
-			/**
-			 * Nombre de rondes dans la partie selon le nombre de joueurs inscrits
-			 * @return {number}
-			 */
-			number_of_rounds() {
-				return Math.min(60 / this.number_of_players, 20);
-			},
+			...mapGetters([
+				'number_of_players'
+			]),
 
 			/**
 			 * Classe pour le nombre de colonnes approprié pour chaque joueur
 			 * @return {string}
 			 */
 			player_cols_class() {
-				const starterClass = 'col-md-';
-				switch (this.number_of_players) {
+				const starterClass = 'col-sm-';
+				switch (this.$store.getters.number_of_players) {
 					case 2:
-						return starterClass + '6';
-					case 3:
 						return starterClass + '4';
-					case 4:
+					case 3:
 						return starterClass + '3';
+					case 4:
+						return starterClass + '2';
 					case 5:
 						return starterClass + '2';
 					case 6:
@@ -66,6 +60,16 @@
 					default:
 						return starterClass + '2';
 				}
+			},
+
+			/**
+			 * Vérifie s'il est possible d'ajouter d'autres joueurs (i.e. le nombre de joueurs actuel
+			 * est inférieur au maximum autorisé)
+			 *
+			 * @return {boolean}
+			 */
+			can_add_more_players() {
+				return this.$store.getters.number_of_players < MAX_NUMBER_OF_PLAYERS;
 			}
 		},
 	}

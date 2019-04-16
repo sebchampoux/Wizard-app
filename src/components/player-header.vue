@@ -25,6 +25,9 @@
 			}
 		},
 		methods: {
+			/**
+			 * Enregistre le nom du joueur pour la partie
+			 */
 			confirm_player_name() {
 				if(this.player_name === null) {
 					this.input_error.is_active = true;
