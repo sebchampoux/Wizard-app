@@ -11,15 +11,6 @@ export class Player {
 	}
 
 	/**
-	 * Défini le nom du joueur
-	 *
-	 * @param {String} name - nom du joueur
-	 */
-	set_name(name) {
-		this.name = name;
-	}
-
-	/**
 	 * Défini le pointage pour une ronde donnée
 	 *
 	 * @param {Number} round - numéro de la ronde (indexé à partir de 0)
@@ -27,5 +18,12 @@ export class Player {
 	 */
 	set_score_for_round(round, score) {
 		this.score_per_round[round] = score;
+	}
+
+	/**
+	 * Calcule et retourne le pointage du joueur
+	 */
+	get_total_score() {
+		return this.score_per_round.reduce((a, b) => a + b, 0);
 	}
 }

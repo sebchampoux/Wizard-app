@@ -68,6 +68,18 @@
 					this.error_border.display_time * 1000
 				);
 			},
+
+			/**
+			 * Enregistre le pointage pour la ronde actuelle dans le store
+			 */
+			send_round_score_to_store() {
+				this.$store.commit({
+					type: 'set_player_score_for_round',
+					player_index: this.player_index,
+					round_index: this.round_index,
+					score_for_round: this.round_score
+				});
+			}
 		},
 		computed: {
 			/**
@@ -97,6 +109,19 @@
 			 */
 			no_result_entered() {
 				return this.real_result === null;
+			},
+
+			/**
+			 * Numéro de la ronde actuelle
+			 * @return {Number}
+			 */
+			round_number() {
+				return this.round_index + 1;
+			}
+		},
+		watch: {
+			round_score() {
+				this.send_round_score_to_store();
 			}
 		},
 		props: {
@@ -110,9 +135,13 @@
 				default: null,
 				required: false,
 			},
-			round_number: {
+			round_index: {
 				type: Number,
-				required: true,
+				required: true
+			},
+			player_index: {
+				type: Number,
+				required: true
 			}
 		},
 	}
