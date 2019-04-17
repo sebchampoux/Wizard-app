@@ -68,18 +68,6 @@
 					this.error_border.display_time * 1000
 				);
 			},
-
-			/**
-			 * Enregistre le pointage pour la ronde actuelle dans le store
-			 */
-			send_round_score_to_store() {
-				this.$store.commit({
-					type: 'set_player_score_for_round',
-					player_index: this.player_index,
-					round_index: this.round_index,
-					score_for_round: this.round_score
-				});
-			}
 		},
 		computed: {
 			/**
@@ -120,8 +108,12 @@
 			}
 		},
 		watch: {
+			/**
+			 * Watcher pour le pointage de la ronde
+			 * Informe son parent lorsqu'il change
+			 */
 			round_score() {
-				this.send_round_score_to_store();
+				this.$emit('score-updated', this.round_score);
 			}
 		},
 		props: {

@@ -2,7 +2,7 @@
 	<div class="player-header" :class="[additional_classes]">
 		<p class="player-header__name" v-if="name_confirmed">{{ player_name }}</p>
 		<div class="player-header__form-wrapper" v-else>
-			<input type="text" class="form-control player-header__input" :class="{'player-header__input--error': input_error.is_active}" v-model="name_input" placeholder="Nom">
+			<input type="text" class="form-control player-header__input" :class="{'player-header__input--error': input_error.is_active}" v-model="player_name" placeholder="Nom">
 			<button type="button" class="btn btn-success btn-sm player-header__confirm-btn" @click="confirm_player_name"><i class="icon-ok"></i></button>
 		</div>
 		<p class="player-header__score">{{ player_score }}</p>
@@ -15,7 +15,7 @@
 
 		data() {
 			return {
-				name_input: '',
+				player_name: null,
 				name_confirmed: false,
 
 				input_error: {
@@ -26,13 +26,12 @@
 		},
 		methods: {
 			confirm_player_name() {
-				if(this.name_input === null) {
+				if(this.player_name === null) {
 					this.display_error_on_name_input();
 					return;
 				}
 
 				this.name_confirmed = true;
-				this.register_new_name_to_store();
 			},
 
 			display_error_on_name_input() {
@@ -41,29 +40,6 @@
 					() => this.input_error.is_active = false,
 					this.input_error.disp_time * 1000
 				);
-			},
-
-			register_new_name_to_store() {
-				this.$store.commit({
-					type: 'set_player_name',
-					player_index: this.player_index,
-					new_player_name: this.name_input
-				});
-			}
-		},
-		computed: {
-			/**
-			 * @return {String}
-			 */
-			player_name() {
-				return this.$store.getters.get_player_name(this.player_index);
-			},
-
-			/**
-			 * @return {Number}
-			 */
-			player_score() {
-				return this.$store.getters.get_player_total(this.player_index);
 			}
 		},
 		props: {
@@ -75,6 +51,11 @@
 				type: String,
 				required: false,
 				default: null,
+			},
+			player_score: {
+				type: Number,
+				required: true,
+				default: 0
 			}
 		}
 	}
