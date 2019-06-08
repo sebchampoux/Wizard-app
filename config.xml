@@ -18,6 +18,12 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <icon density="hdpi" height="72" src="res/icon/android/hdpi.png" width="72" />
+        <icon density="ldpi" height="36" src="res/icon/android/ldpi.png" width="36" />
+        <icon density="mdpi" height="48" src="res/icon/android/mdpi.png" width="48" />
+        <icon density="xhdpi" height="96" src="res/icon/android/xhdpi.png" width="96" />
+        <icon density="xxhdpi" height="144" src="res/icon/android/xxhdpi.png" width="144" />
+        <icon density="xxxhdpi" height="192" src="res/icon/android/xxxhdpi.png" width="192" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
