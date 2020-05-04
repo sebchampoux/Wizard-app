@@ -17,7 +17,6 @@
 			return {
 				player_name: null,
 				name_confirmed: false,
-
 				input_error: {
 					disp_time: 2, // en secondes
 					is_active: false,
@@ -30,10 +29,8 @@
 					this.display_error_on_name_input();
 					return;
 				}
-
 				this.name_confirmed = true;
 			},
-
 			display_error_on_name_input() {
 				this.input_error.is_active = true;
 				setTimeout(
@@ -42,20 +39,24 @@
 				);
 			}
 		},
-		props: {
-			player_index: {
-				type: Number,
-				required: true
+		computed: {
+			player_score() {
+				if (this.player_score_array.length === 0) {
+					return 0;
+				}
+				return this.player_score_array.reduce((a,b) => a + b);
 			},
+		},
+		props: {
 			additional_classes: {
 				type: String,
 				required: false,
 				default: null,
 			},
-			player_score: {
-				type: Number,
+			player_score_array: {
+				type: Array,
 				required: true,
-				default: 0
+				default: [],
 			}
 		}
 	}

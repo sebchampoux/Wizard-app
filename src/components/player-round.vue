@@ -105,6 +105,10 @@
 			 */
 			round_number() {
 				return this.round_index + 1;
+			},
+			/** @returns boolean */
+			is_even() {
+				return (this.round_index % 2) == 0;
 			}
 		},
 		watch: {
@@ -113,15 +117,14 @@
 			 * Informe son parent lorsqu'il change
 			 */
 			round_score() {
-				this.$emit('score-updated', this.round_score);
+				this.$emit('score-updated', {
+					score: this.round_score,
+					player_index: this.player_index,
+					round_index: this.round_index,
+				});
 			}
 		},
 		props: {
-			is_even: {
-				type: Boolean,
-				default: false,
-				required: false,
-			},
 			additional_classes: {
 				type: String,
 				default: null,
@@ -134,7 +137,7 @@
 			player_index: {
 				type: Number,
 				required: true
-			}
+			},
 		},
 	}
 </script>

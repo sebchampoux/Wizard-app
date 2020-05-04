@@ -1,21 +1,38 @@
 <template>
 	<div class="app-frame">
-		<div class="container">
-			<div class="row">
-				<!-- Les colonnes joueur -->
-				<player-column
+		<div class="players-head">
+			<div class="container-fluid">
+				<div class="row">
+					<div
 						v-for="player_number in number_of_players"
-						:number_of_rounds="number_of_rounds"
 						:key="player_number - 1"
-						:player_index="player_number - 1"
-						:additional_classes="player_cols_class">
-				</player-column>
-				<!-- La colonne ajout nouveau joueur -->
+						:class="player_cols_class">
+						<player-header :player_score_array="players_scores[player_number - 1]"></player-header>
+					</div>
+					<div
+							class="add-new-player"
+							:class="player_cols_class"
+							v-if="can_add_more_players">
+						<button class="btn btn-success" @click="add_new_player">+ Joueur</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid rounds-wrapper">
+			<div class="row">
 				<div
-						class="add-new-player"
-						:class="player_cols_class"
-						v-if="can_add_more_players">
-					<button class="btn btn-success" @click="add_new_player">+ Joueur</button>
+						v-for="player_number in number_of_players"
+						:key="player_number - 1"
+						class="player-column"
+						:class="player_cols_class">
+						<player-round
+							v-for="round_number in number_of_rounds"
+							:key="round_number - 1"
+							:round_index="round_number - 1"
+							:player_index="player_number - 1"
+							@score-updated="update_player_score"
+							additional_classes="player-column__player-round">
+						</player-round>
 				</div>
 			</div>
 		</div>
@@ -23,23 +40,35 @@
 </template>
 
 <script>
-	import PlayerColumn from "./components/player-column";
+	import PlayerHeader from './components/player-header';
+	import PlayerRound from './components/player-round';
 
 	const MAX_NUMBER_OF_PLAYERS = 6;
 
 	export default {
 		name: 'App',
-		components: {PlayerColumn},
+		components: {
+			PlayerHeader,
+			PlayerRound
+		},
 		data() {
 			return {
-				number_of_players: 2
+				number_of_players: 2,
+				players_scores: [
+					[],
+					[],
+				],
 			}
 		},
 		methods: {
 			add_new_player() {
 				if(this.can_add_more_players) {
 					this.number_of_players++;
+					this.players_scores.push([]);
 				}
+			},
+			update_player_score(e) {
+				this.players_scores[e.player_index].splice(e.round_index, 1, e.score);
 			}
 		},
 		computed: {

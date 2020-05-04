@@ -1,8 +1,7 @@
 <template>
 	<div class="player-column" :class="[additional_classes]">
 		<player-header
-				:player_score="player_score"
-				:player_index="player_index">
+				:player_score="player_score">
 		</player-header>
 		<player-round
 				v-for="round in number_of_rounds"
