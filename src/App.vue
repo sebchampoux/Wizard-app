@@ -1,5 +1,5 @@
 <template>
-	<div class="app-frame">
+	<div class="app-frame" :class="{ 'app-frame--names-confirmed': all_names_confirmed }">
 		<div class="players-head">
 			<div class="container-fluid">
 				<div class="row">
@@ -7,7 +7,11 @@
 						v-for="player_number in number_of_players"
 						:key="player_number - 1"
 						:class="player_cols_class">
-						<player-header :player_score_array="players_scores[player_number - 1]"></player-header>
+						<player-header
+							:player_score_array="players_scores[player_number - 1]"
+							:player_index="player_number - 1"
+							@name-confirmed="name_confirmed">
+						</player-header>
 					</div>
 					<div
 							class="add-new-player"
@@ -58,6 +62,10 @@
 					[],
 					[],
 				],
+				confirmed_names: [
+					false,
+					false,
+				],
 			}
 		},
 		methods: {
@@ -65,11 +73,15 @@
 				if(this.can_add_more_players) {
 					this.number_of_players++;
 					this.players_scores.push([]);
+					this.confirmed_names.push(false);
 				}
 			},
 			update_player_score(e) {
 				this.players_scores[e.player_index].splice(e.round_index, 1, e.score);
-			}
+			},
+			name_confirmed(e) {
+				this.confirmed_names.splice(e.player_index, 1, true);
+			},
 		},
 		computed: {
 			/**
@@ -106,6 +118,10 @@
 			 */
 			can_add_more_players() {
 				return this.number_of_players < MAX_NUMBER_OF_PLAYERS;
+			},
+
+			all_names_confirmed() {
+				return this.confirmed_names.every(e => e);
 			}
 		},
 	}

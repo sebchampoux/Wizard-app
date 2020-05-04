@@ -30,6 +30,7 @@
 					return;
 				}
 				this.name_confirmed = true;
+				this.$emit('name-confirmed', { player_index: this.player_index });
 			},
 			display_error_on_name_input() {
 				this.input_error.is_active = true;
@@ -57,6 +58,10 @@
 				type: Array,
 				required: true,
 				default: [],
+			},
+			player_index: {
+				type: Number,
+				required: true,
 			}
 		}
 	}
